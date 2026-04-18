@@ -1,12 +1,12 @@
 export default function Badge({ children, variant = 'default' }) {
   const variants = {
-    default: 'bg-brand-cream text-brand-olive',
-    gold: 'bg-brand-gold text-white',
-    new: 'bg-brand-black text-brand-white',
-    sale: 'bg-brand-error text-white',
+    default: 'bg-[#e8e0d5] text-[#1a1a1a]',
+    gold:    'bg-[#c8a97e] text-white',
+    accent:  'bg-[#d94f3d] text-white',
+    outline: 'border border-[#1a1a1a] text-[#1a1a1a]',
   }
   return (
-    <span className={`text-xs tracking-widest uppercase px-2 py-1 ${variants[variant]}`}>
+    <span className={`inline-block text-[10px] font-medium tracking-widest uppercase px-3 py-1 rounded-full ${variants[variant]}`}>
       {children}
     </span>
   )
