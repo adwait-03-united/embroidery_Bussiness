@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { ShoppingBag, Menu, X, Search, User, LogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
+import { useCart } from '../../context/CartContext'
 
 const links = [
   { to: '/',                    label: 'Home' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { isAuthenticated, user, logout } = useAuth()
   const navigate = useNavigate()
+  const { totalItems, setIsOpen } = useCart()
 
   const handleLogout = () => {
     logout()
@@ -48,9 +50,10 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link to="/cart" className="relative text-[#1a1a1a] hover:text-[#c8a97e] transition-colors">
-            <ShoppingBag size={20} />
-          </Link>
+          <button onClick={() => setIsOpen(true)} className="relative text-[#1a1a1a] hover:text-[#c8a97e] transition-colors"> <ShoppingBag size={20} />
+          {totalItems > 0 && (<span className="absolute -top-1.5 -right-1.5 bg-[#c8a97e] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-medium">
+            {totalItems > 9 ? '9+' : totalItems}</span>)}
+          </button>
 
           {isAuthenticated ? (
             <div className="hidden md:flex items-center gap-3">

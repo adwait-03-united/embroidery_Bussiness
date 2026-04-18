@@ -7,6 +7,7 @@ import { getProductBySlug } from '../api/products'
 import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import ErrorMessage from '../components/ui/ErrorMessage'
+import { useCart } from '../context/CartContext'
 
 function PDPSkeleton() {
   return (
@@ -29,6 +30,7 @@ export default function Product() {
   const [selectedSize,  setSelectedSize]  = useState(null)
   const [selectedColor, setSelectedColor] = useState(null)
   const [qty, setQty] = useState(1)
+  const { addItem } = useCart()
 
   const { data: product, isLoading, isError } = useQuery({
     queryKey: ['product', slug],
@@ -43,9 +45,13 @@ export default function Product() {
     : null
 
   const handleAddToCart = () => {
-    if (!selectedSize) { toast.error('Please select a size'); return }
-    toast.success(`${product.name} added to cart!`)
+  if (!selectedSize) {
+    toast.error('Please select a size')
+    return
   }
+  addItem(product, selectedSize, selectedColor, qty)
+  toast.success(`${product.name} added to cart!`)
+}
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-10">

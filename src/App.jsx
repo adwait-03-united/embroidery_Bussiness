@@ -3,14 +3,16 @@ import { lazy, Suspense } from 'react'
 import Layout from './components/layout/Layout'
 import PrivateRoute from './components/layout/PrivateRoute'
 
-const Home     = lazy(() => import('./pages/Home'))
-const Shop     = lazy(() => import('./pages/Shop'))
-const Product  = lazy(() => import('./pages/Product'))
-const About    = lazy(() => import('./pages/About'))
-const Login    = lazy(() => import('./pages/Login'))
-const Register = lazy(() => import('./pages/Register'))
-const Profile  = lazy(() => import('./pages/Profile'))
-const NotFound = lazy(() => import('./pages/NotFound'))
+const Home         = lazy(() => import('./pages/Home'))
+const Shop         = lazy(() => import('./pages/Shop'))
+const Product      = lazy(() => import('./pages/Product'))
+const About        = lazy(() => import('./pages/About'))
+const Login        = lazy(() => import('./pages/Login'))
+const Register     = lazy(() => import('./pages/Register'))
+const Profile      = lazy(() => import('./pages/Profile'))
+const Checkout     = lazy(() => import('./pages/Checkout'))
+const OrderSuccess = lazy(() => import('./pages/OrderSuccess'))
+const NotFound     = lazy(() => import('./pages/NotFound'))
 
 function PageLoader() {
   return (
@@ -32,9 +34,9 @@ export default function App() {
           <Route path="about"                 element={<About />} />
           <Route path="login"                 element={<Login />} />
           <Route path="register"              element={<Register />} />
-          <Route path="profile"               element={
-            <PrivateRoute><Profile /></PrivateRoute>
-          } />
+          <Route path="order-success"         element={<OrderSuccess />} />
+          <Route path="profile"  element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
           <Route path="*"                     element={<NotFound />} />
         </Route>
       </Routes>
