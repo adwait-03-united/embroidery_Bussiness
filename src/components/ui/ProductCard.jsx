@@ -21,11 +21,13 @@ export default function ProductCard({ product }) {
   return (
     <div className="group relative bg-white rounded overflow-hidden border border-[#e8e0d5] hover:shadow-md transition-shadow duration-300">
       <Link to={`/product/${slug}`} className="block aspect-[3/4] overflow-hidden bg-[#f5f0eb]">
-        <img
-          src={src}
-          alt={name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+      <img
+        src={src}
+        alt={name}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
       </Link>
 
       {badge && (

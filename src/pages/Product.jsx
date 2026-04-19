@@ -74,11 +74,13 @@ export default function Product() {
 
         {/* Image */}
         <div className="aspect-[3/4] bg-[#f5f0eb] rounded overflow-hidden">
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          loading="eager"
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
         </div>
 
         {/* Info panel */}
