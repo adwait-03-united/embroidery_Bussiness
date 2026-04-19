@@ -1,3 +1,5 @@
+import SEO from '../components/ui/SEO' // ✅ ADD THIS
+
 export default function About() {
   const values = [
     { title: 'Hand Embroidered', desc: 'Every motif is stitched by skilled artisans — no machine shortcuts.' },
@@ -7,6 +9,13 @@ export default function About() {
 
   return (
     <div>
+
+      {/* ✅ SEO added here */}
+      <SEO
+        title="Our Story"
+        description="Stitch & Co started in Pune with one embroidery frame and a belief that everyday clothing should feel extraordinary."
+      />
+
       <section className="bg-[#1a1a1a] text-white text-center py-24 px-5">
         <p className="text-xs tracking-widest uppercase text-[#c8a97e] mb-3">Our Story</p>
         <h1 className="font-heading text-4xl md:text-6xl mb-6 leading-tight">
@@ -29,6 +38,7 @@ export default function About() {
           </div>
         ))}
       </section>
+
     </div>
   )
 }

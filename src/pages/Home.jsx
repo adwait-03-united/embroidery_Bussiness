@@ -7,6 +7,8 @@ import Badge from '../components/ui/Badge'
 import SectionTitle from '../components/ui/SectionTitle'
 import ProductCard from '../components/ui/ProductCard'
 import { ProductGridSkeleton } from '../components/ui/Skeleton'
+import { FadeUp, StaggerGrid, StaggerItem, PageTransition } from '../components/ui/Animate'
+import SEO from '../components/ui/SEO' // ✅ ADD THIS
 
 const CATEGORIES = [
   { label: 'T-Shirts', slug: 'tshirts', desc: 'Casual embroidered tees' },
@@ -22,6 +24,10 @@ export default function Home() {
 
   return (
     <div>
+      
+      {/* ✅ SEO added here */}
+      <SEO title="Home" />
+
       <section className="relative min-h-[88vh] flex flex-col items-center justify-center text-center px-5 bg-[#f5f0eb]">
         <div className="max-w-3xl">
           <Badge variant="gold">Summer Collection 2025</Badge>
@@ -80,6 +86,7 @@ export default function Home() {
           Every stitch is placed with intention. We use only premium fabrics and hand-guide every embroidery frame ourselves.
         </p>
       </section>
+      
     </div>
   )
 }

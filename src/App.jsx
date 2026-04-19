@@ -13,6 +13,7 @@ const Profile      = lazy(() => import('./pages/Profile'))
 const Checkout     = lazy(() => import('./pages/Checkout'))
 const OrderSuccess = lazy(() => import('./pages/OrderSuccess'))
 const NotFound     = lazy(() => import('./pages/NotFound'))
+const Wishlist = lazy(() => import('./pages/Wishlist'))
 
 function PageLoader() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="profile"  element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
           <Route path="*"                     element={<NotFound />} />
+          <Route path="wishlist" element={<Wishlist />} />
         </Route>
       </Routes>
     </Suspense>

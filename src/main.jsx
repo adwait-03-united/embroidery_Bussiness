@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
+import { WishlistProvider } from './context/WishlistContext'
 import './index.css'
 import App from './App.jsx'
 
@@ -16,8 +17,23 @@ createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <CartProvider>
-            <App />
-            <Toaster position="top-right" />
+            <WishlistProvider>
+              <App />
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  duration: 3000,
+                  style: {
+                    background: '#1a1a1a',
+                    color: '#f5f0eb',
+                    fontSize: '13px',
+                    borderRadius: '6px',
+                  },
+                  success: { iconTheme: { primary: '#c8a97e', secondary: '#1a1a1a' } },
+                  error:   { iconTheme: { primary: '#d94f3d', secondary: '#fff' } },
+                }}
+              />
+            </WishlistProvider>
           </CartProvider>
         </AuthProvider>
       </QueryClientProvider>

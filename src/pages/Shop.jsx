@@ -7,6 +7,7 @@ import ProductCard from '../components/ui/ProductCard'
 import { ProductGridSkeleton } from '../components/ui/Skeleton'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import SectionTitle from '../components/ui/SectionTitle'
+import SEO from '../components/ui/SEO' // ✅ ADD THIS
 
 const SORT_OPTIONS = [
   { value: 'default',    label: 'Featured' },
@@ -41,11 +42,19 @@ export default function Shop() {
 
   return (
     <div className="max-w-7xl mx-auto px-5 py-14">
+
+      {/* ✅ SEO added here */}
+      <SEO
+        title={title}
+        description={`Shop ${title} — handcrafted embroidery on premium casual wear.`}
+      />
+
       <SectionTitle
         label={category ? 'Collection' : 'Shop'}
         title={title}
         subtitle={`${products.length} product${products.length !== 1 ? 's' : ''}`}
       />
+
       <div className="flex flex-wrap items-center gap-3 mb-8">
         <div className="relative flex-1 min-w-[200px]">
           <input
@@ -61,6 +70,7 @@ export default function Shop() {
             </button>
           )}
         </div>
+
         <div className="flex items-center gap-2">
           <SlidersHorizontal size={15} className="text-[#5f5e5a]" />
           <select
@@ -74,6 +84,7 @@ export default function Shop() {
           </select>
         </div>
       </div>
+
       {isLoading ? (
         <ProductGridSkeleton count={8} />
       ) : isError ? (
