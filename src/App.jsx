@@ -1,19 +1,24 @@
 import { Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import Layout from './components/layout/Layout'
-import PrivateRoute from './components/layout/PrivateRoute'
+import Layout        from './components/layout/Layout'
+import PrivateRoute  from './components/layout/PrivateRoute'
+import AdminRoute    from './components/layout/AdminRoute'
 
-const Home         = lazy(() => import('./pages/Home'))
-const Shop         = lazy(() => import('./pages/Shop'))
-const Product      = lazy(() => import('./pages/Product'))
-const About        = lazy(() => import('./pages/About'))
-const Login        = lazy(() => import('./pages/Login'))
-const Register     = lazy(() => import('./pages/Register'))
-const Profile      = lazy(() => import('./pages/Profile'))
-const Checkout     = lazy(() => import('./pages/Checkout'))
-const OrderSuccess = lazy(() => import('./pages/OrderSuccess'))
-const NotFound     = lazy(() => import('./pages/NotFound'))
-const Wishlist = lazy(() => import('./pages/Wishlist'))
+const Home           = lazy(() => import('./pages/Home'))
+const Shop           = lazy(() => import('./pages/Shop'))
+const Product        = lazy(() => import('./pages/Product'))
+const About          = lazy(() => import('./pages/About'))
+const Login          = lazy(() => import('./pages/Login'))
+const Register       = lazy(() => import('./pages/Register'))
+const Profile        = lazy(() => import('./pages/Profile'))
+const MyOrders       = lazy(() => import('./pages/MyOrders'))
+const Wishlist       = lazy(() => import('./pages/Wishlist'))
+const Checkout       = lazy(() => import('./pages/Checkout'))
+const OrderSuccess   = lazy(() => import('./pages/OrderSuccess'))
+const NotFound       = lazy(() => import('./pages/NotFound'))
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
+const AdminProducts  = lazy(() => import('./pages/admin/AdminProducts'))
+const AdminOrders    = lazy(() => import('./pages/admin/AdminOrders'))
 
 function PageLoader() {
   return (
@@ -35,11 +40,15 @@ export default function App() {
           <Route path="about"                 element={<About />} />
           <Route path="login"                 element={<Login />} />
           <Route path="register"              element={<Register />} />
+          <Route path="wishlist"              element={<Wishlist />} />
           <Route path="order-success"         element={<OrderSuccess />} />
-          <Route path="profile"  element={<PrivateRoute><Profile /></PrivateRoute>} />
-          <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
-          <Route path="*"                     element={<NotFound />} />
-          <Route path="wishlist" element={<Wishlist />} />
+          <Route path="profile"   element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="my-orders" element={<PrivateRoute><MyOrders /></PrivateRoute>} />
+          <Route path="checkout"  element={<PrivateRoute><Checkout /></PrivateRoute>} />
+          <Route path="admin"          element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+          <Route path="admin/products" element={<AdminRoute><AdminProducts /></AdminRoute>} />
+          <Route path="admin/orders"   element={<AdminRoute><AdminOrders /></AdminRoute>} />
+          <Route path="*"             element={<NotFound />} />
         </Route>
       </Routes>
     </Suspense>

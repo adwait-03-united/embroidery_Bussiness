@@ -16,13 +16,11 @@ const schema = z.object({
 })
 
 export default function Login() {
-  const { login } = useAuth()
-  const navigate  = useNavigate()
-  const location  = useLocation()
-  const [showPw, setShowPw]     = useState(false)
-  const [loading, setLoading]   = useState(false)
-
-  // After login, go back to where user came from (e.g. checkout)
+  const { login }  = useAuth()
+  const navigate   = useNavigate()
+  const location   = useLocation()
+  const [showPw, setShowPw]   = useState(false)
+  const [loading, setLoading] = useState(false)
   const from = location.state?.from?.pathname || '/'
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -33,11 +31,11 @@ export default function Login() {
     setLoading(true)
     try {
       const result = await loginUser(data)
-      login(result.user, result.token)
-      toast.success(`Welcome back, ${result.user.name}!`)
+      login(result, result.token)
+      toast.success(`Welcome back, ${result.name}!`)
       navigate(from, { replace: true })
     } catch (err) {
-      toast.error(err.message || 'Login failed. Please try again.')
+      toast.error(err.response?.data?.message || 'Login failed. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -60,7 +58,6 @@ export default function Login() {
             error={errors.email?.message}
             {...register('email')}
           />
-
           <div className="relative">
             <Input
               label="Password"
@@ -78,12 +75,6 @@ export default function Login() {
             </button>
           </div>
 
-          <div className="flex justify-end">
-            <Link to="/forgot-password" className="text-xs text-[#c8a97e] hover:underline">
-              Forgot password?
-            </Link>
-          </div>
-
           <Button type="submit" size="lg" className="w-full" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
           </Button>
@@ -96,7 +87,6 @@ export default function Login() {
           </Link>
         </p>
 
-        {/* Quick test login hint */}
         <div className="mt-6 p-3 bg-[#f5f0eb] rounded text-xs text-[#5f5e5a] text-center">
           Test: <strong>test@example.com</strong> / <strong>password123</strong>
         </div>

@@ -18,7 +18,7 @@ const schema = z.object({
     .regex(/[A-Z]/, 'Must contain at least one uppercase letter')
     .regex(/[0-9]/, 'Must contain at least one number'),
   confirmPassword: z.string(),
-}).refine(data => data.password === data.confirmPassword, {
+}).refine(d => d.password === d.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],
 })
@@ -37,11 +37,11 @@ export default function Register() {
     setLoading(true)
     try {
       const result = await registerUser(data)
-      login(result.user, result.token)
-      toast.success(`Account created! Welcome, ${result.user.name}!`)
+      login(result, result.token)
+      toast.success(`Account created! Welcome, ${result.name}!`)
       navigate('/')
     } catch (err) {
-      toast.error(err.message || 'Registration failed. Please try again.')
+      toast.error(err.response?.data?.message || 'Registration failed. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -64,7 +64,6 @@ export default function Register() {
             error={errors.name?.message}
             {...register('name')}
           />
-
           <Input
             label="Email address"
             type="email"
@@ -72,7 +71,6 @@ export default function Register() {
             error={errors.email?.message}
             {...register('email')}
           />
-
           <div className="relative">
             <Input
               label="Password"
@@ -89,7 +87,6 @@ export default function Register() {
               {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
-
           <Input
             label="Confirm password"
             type={showPw ? 'text' : 'password'}

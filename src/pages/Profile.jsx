@@ -1,13 +1,13 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { LogOut, User, Package, Heart, MapPin } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/ui/Button'
 
+// ❌ Removed "My Orders" from MENU
 const MENU = [
-  { icon: Package, label: 'My Orders',    desc: 'Track and view your orders' },
-  { icon: Heart,   label: 'Wishlist',     desc: 'Items you have saved' },
-  { icon: MapPin,  label: 'Addresses',    desc: 'Saved delivery addresses' },
+  { icon: Heart,   label: 'Wishlist',  desc: 'Items you have saved' },
+  { icon: MapPin,  label: 'Addresses', desc: 'Saved delivery addresses' },
 ]
 
 export default function Profile() {
@@ -43,6 +43,22 @@ export default function Profile() {
 
       {/* Menu items */}
       <div className="flex flex-col gap-3 mb-6">
+
+        {/* ✅ My Orders as LINK */}
+        <Link
+          to="/my-orders"
+          className="bg-white border border-[#e8e0d5] rounded-lg p-4 flex items-center gap-4 hover:border-[#c8a97e] transition-colors"
+        >
+          <div className="w-10 h-10 rounded-full bg-[#f5f0eb] flex items-center justify-center flex-shrink-0">
+            <Package size={18} className="text-[#c8a97e]" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-[#1a1a1a]">My Orders</p>
+            <p className="text-xs text-[#5f5e5a] mt-0.5">Track and view your orders</p>
+          </div>
+        </Link>
+
+        {/* Other menu items */}
         {MENU.map(item => (
           <button
             key={item.label}
